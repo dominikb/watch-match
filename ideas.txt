@@ -1,0 +1,18 @@
+netflix tinder
+- find matches of movies and shows to watch together
+- download app, connect to netflix, automatically add to watchlist
+- dont show already shown movies
+- like, dislike, skip
+
+multiple accounts (join and removal)
+
+----
+favorite tv show face-off
+- find shows ive watched
+- face off 1v1
+- find favorite in the end
+- show statistics and make suggestions
+
+
+https://developers.themoviedb.org/3/getting-started/append-to-response
+remove comment about query rate limit
