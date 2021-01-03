@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\TmdbProvider;
+
 return [
 
     /*
@@ -174,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
+        TmdbProvider::class,
 
     ],
 
