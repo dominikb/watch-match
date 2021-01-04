@@ -62,7 +62,7 @@ Route::get('/login', function() {
 Route::post('/login', function() {
     session()->start();
     session()->put('username', request('username'));
-    return redirect('/login');
+    return redirect('/suggest');
 });
 
 Route::get('/logout', function() {

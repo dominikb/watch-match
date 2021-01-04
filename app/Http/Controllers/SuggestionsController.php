@@ -26,8 +26,7 @@ class SuggestionsController extends Controller
         $meta = MovieMetaInformation::query()
             ->inRandomOrder()
             ->where('available_on_netflix', true)
-            // TODO: add once recommendability was checked a bit more
-//            ->where('recommendable', true)
+            ->where('recommendable', true)
             ->whereNotIn('movie_id', function(Builder $query) {
                 return $query->select('movie_id')
                     ->from(with(new UserMovieInformation())->getTable())

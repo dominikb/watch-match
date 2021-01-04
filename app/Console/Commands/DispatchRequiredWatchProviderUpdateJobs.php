@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\MovieMetaInformation;
 use App\Jobs\CheckWatchProvidersJob;
+use App\Jobs\CheckMovieForRecommendability;
 
 class DispatchRequiredWatchProviderUpdateJobs extends Command
 {
@@ -40,9 +41,10 @@ class DispatchRequiredWatchProviderUpdateJobs extends Command
     public function handle()
     {
         $count = 0;
-        foreach (MovieMetaInformation::on('pgsql')->shouldUpdateNetflixProvider()->cursor() as $meta) {
+        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
             $count++;
             CheckWatchProvidersJob::dispatch($meta->movie_id);
+            CheckMovieForRecommendability::dispatch($meta->movie_id);
         }
 
         return 0;

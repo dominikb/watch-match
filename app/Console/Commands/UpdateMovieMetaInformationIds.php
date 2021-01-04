@@ -47,7 +47,7 @@ class UpdateMovieMetaInformationIds extends Command
         QUERY));
 
         $count = 0;
-        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor()->skip(30000) as $meta) {
+        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
             $this->watchProviderService->updateWatchProviderAvailability($meta)->saveOrFail();
             echo "$count" . PHP_EOL;
             $count++;
