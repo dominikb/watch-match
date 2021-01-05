@@ -7,6 +7,7 @@
 
         <link href="{{ mix('css/settings.css') }}" rel="stylesheet">
         <link href="{{ mix('css/default.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/login.css') }}" rel="stylesheet">
         <link href="{{ mix('css/navigation.css') }}" rel="stylesheet">
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -14,10 +15,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Open+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div><a href="/logout">Logout</a></div>
+
+        @include('partials/logout')
+
         <main>
             @yield('content')
         </main>
+
         @include('partials/menu')
+
     </body>
 </html>

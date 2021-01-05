@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-@if( session('username') )
-<h1>Hello, {{ session('username') }}</h1>
+    @unless( session('username') )
+        <h1>Login</h1>
 
-@include('partials/menu')
-@else
-<h1>Login</h1>
+        <div class="login_buttons">
 
-<form action="/login" method="post">
-    @csrf
-    <input hidden id="username" name="username" type="text" value="Dominik">
-    <button type="submit">Dominik</button>
-</form>
+            <form action="/login" method="post">
+                @csrf
+                <input hidden id="username" name="username" type="text" value="Dominik">
+                <button type="submit">Dominik</button>
+            </form>
 
-<form action="/login" method="post">
-    @csrf
-    <input hidden id="username" name="username" type="text" value="Kathi">
-    <button type="submit">Kathi</button>
-</form>
-@endif
+            <form action="/login" method="post">
+                @csrf
+                <input hidden id="username" name="username" type="text" value="Kathi">
+                <button type="submit">Kathi</button>
+            </form>
+
+        </div>
+    @endunless
 @endsection

@@ -10,10 +10,29 @@ nav
     display: flex
     justify-content: space-between
 
-    div 
+    .menuitem 
+        fill: $text-color-light
         flex-grow: 1
-        padding: 0.5rem
+        padding: 0.8rem
         display: flex
         justify-content: center
         align-items: center
-    
+        transition: all $transition-time ease-out
+
+        .icon 
+            display: block
+            width: 3rem
+            height: 2rem
+            transition: transform $transition-time ease-out
+
+        &:hover,
+        &:focus
+            background: lighten($bg-color, 3%)
+
+            .icon
+                transform: scale(1.1)
+            
+        &.active
+            background: lighten($bg-color, 3%)
+            fill: $main-color
+            

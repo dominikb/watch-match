@@ -1,0 +1,28 @@
+@import 'settings.sass'
+
+.login_buttons
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+
+    button 
+        font-size: 1.5rem
+        min-width: 13rem
+        padding: 1rem
+        margin: 1rem
+
+.logout_wrapper 
+    display: flex
+    justify-content: flex-end
+    padding: 0.3em 0.5em
+
+    .logout 
+        display: inline-block
+        margin-left: 0.5em
+        text-decoration: none
+
+        &:hover,
+        &:focus, 
+        &:active
+            color: $main-color
+            text-decoration: underline
