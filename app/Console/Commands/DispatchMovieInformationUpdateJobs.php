@@ -7,14 +7,14 @@ use App\Models\MovieMetaInformation;
 use App\Jobs\CheckWatchProvidersJob;
 use App\Jobs\CheckMovieForRecommendability;
 
-class DispatchRequiredWatchProviderUpdateJobs extends Command
+class DispatchMovieInformationUpdateJobs extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:dispatch-watch-provider-update-jobs';
+    protected $signature = 'command:dispatch-movie-information-jobs';
 
     /**
      * The console command description.
@@ -40,12 +40,19 @@ class DispatchRequiredWatchProviderUpdateJobs extends Command
      */
     public function handle()
     {
-        $count = 0;
+        $jobsCreated = 0;
+
         foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
-            $count++;
             CheckWatchProvidersJob::dispatch($meta->movie_id);
-            CheckMovieForRecommendability::dispatch($meta->movie_id);
+            $jobsCreated++;
         }
+
+        foreach (MovieMetaInformation::shouldUpdateRecommendability()->cursor() as $meta) {
+            CheckMovieForRecommendability::dispatch($meta->movie_id);
+            $jobsCreated++;
+        }
+
+        $this->getOutput()->writeln("$jobsCreated jobs created.");
 
         return 0;
     }

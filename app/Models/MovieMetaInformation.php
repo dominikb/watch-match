@@ -18,4 +18,14 @@ class MovieMetaInformation extends Model
             ->whereNull('providers_checked_at')
             ->orWhereDate('providers_checked_at', '<', Carbon::now()->subDays(7));
     }
+
+    public function scopeShouldUpdateRecommendability(Builder $query): Builder {
+        return $query
+            ->where('available_on_netflix', true)
+            ->where(function($query) {
+                return $query
+                    ->whereNull('check_for_recommendability_at')
+                    ->orWhereDate('check_for_recommendability_at', '<', Carbon::now()->subDays(7));
+            });
+    }
 }

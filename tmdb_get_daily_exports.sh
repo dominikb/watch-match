@@ -3,7 +3,7 @@
 mkdir -p tmdb_files
 pushd tmdb_files
 
-set -aux
+set -au
 
 formatted_date=$(date +'%m_%d_%Y')
 
