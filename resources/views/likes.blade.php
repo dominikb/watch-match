@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-    <title>Likes</title>
-
-</head>
-<body class="antialiased">
-
-    @include('partials/menu')
+@section('content')
+    <h1>Likes (Diese Seite braucht keiner</h1>
 
     <div style="display: grid; grid-template-columns: 50% 50%;">
         @foreach($movies as $movie)
@@ -23,7 +15,5 @@
     </div>
 
     {{ $userMovieInformation->links() }}
+@endsection
 
-
-</body>
-</html>

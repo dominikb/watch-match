@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-    <title>Movie</title>
-
-    <style>
-        body {
-            font-family: 'Nunito';
-        }
-    </style>
-</head>
-<body class="antialiased">
+@section('content')
+    <h1>WatchMatch</h1>
 
     <h1>{{ $movie->getTitle() }}</h1>
     <div>
@@ -32,7 +21,4 @@
         <button name="seen">Seen</button>
         <button name="like">Like</button>
     </form>
-
-    @include('partials/menu')
-</body>
-</html>
+@endsection

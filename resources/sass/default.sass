@@ -1,0 +1,43 @@
+@import 'settings.sass'
+    
+* 
+    border: 0
+    padding: 0
+    margin: 0
+
+body
+    background-color: $text-color
+    font-family: 'Open Sans', sans-serif
+    font-size: 1rem
+    color: $text-color-light
+    
+
+main 
+    width: 90vw
+    max-width: 100rem
+    min-width: 12rem
+    margin: 0 auto
+
+h1 
+    color: $text-color-light
+    font-family: 'Major Mono Display', monospace
+    margin-bottom: 2rem
+    display: block
+    font-weight: 400
+    
+button 
+    border: 1px solid $text-color-light
+    padding: 0.5rem 1rem
+    margin: 0
+    background: transparent
+    color: $text-color-light
+    border-radius: $border-radius
+    cursor: pointer
+    transition: all $transition-time ease-out
+    outline: 0
+
+    &:hover,
+    &:focus,
+    &.active
+        border-color: $main-color
+        color: $main-color
