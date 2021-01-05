@@ -7,6 +7,7 @@ use App\Models\UserMovieInformation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MatchesController;
+use App\Http\Controllers\WatchedController;
 use App\Http\Controllers\SuggestionsController;
 
 /*
@@ -20,20 +21,7 @@ use App\Http\Controllers\SuggestionsController;
 |
 */
 
-Route::get('/', function (MovieRepository $movieRepository) {
-    $posterPaths = MovieMetaInformation::whereAvailableOnNetflix(true)
-        ->inRandomOrder()
-        ->take(10)
-        ->get()
-        ->map(function(MovieMetaInformation $entry) use ($movieRepository) {
-            /** @var Movie $movie */
-            $movie = $movieRepository->load($entry->movie_id);
-
-            return config('tmdb.image_path') . $movie->getPosterPath();
-        });
-
-    return view('movies', compact('posterPaths'));
-});
+Route::redirect('/', '/login');
 
 Route::get('/suggest', SuggestionsController::class);
 
@@ -73,3 +61,4 @@ Route::get('/logout', function() {
 Route::get('/matches', MatchesController::class);
 
 Route::get('/likes', LikeController::class);
+Route::get('/watched', WatchedController::class);

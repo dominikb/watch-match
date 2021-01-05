@@ -24,7 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule
+            ->command('dispatch-movie-information-jobs')
+            ->description('Download daily export and dispatch update jobs for detail information.')
+            ->twiceDaily();
     }
 
     /**

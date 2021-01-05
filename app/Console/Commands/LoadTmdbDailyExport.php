@@ -2,28 +2,34 @@
 
 namespace App\Console\Commands;
 
-use App\WatchProviderService;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Models\MovieMetaInformation;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Helper\ProgressBar;
 
-class UpdateMovieMetaInformationIds extends Command
+class LoadTmdbDailyExport extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:update_movie_meta_ids';
+    protected $signature = 'command:load-tmdb-daily-export';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Add/remove movie ids in meta table. Uses temporary import table movie_ids.';
+    protected $description = 'Load daily exported files containing all ids from TMDB.';
 
-    public function __construct(private WatchProviderService $watchProviderService)
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
         parent::__construct();
     }
@@ -35,6 +41,13 @@ class UpdateMovieMetaInformationIds extends Command
      */
     public function handle()
     {
+        if (! File::isDirectory(storage_path('tmdb_files'))) {
+            File::makeDirectory(storage_path('tmdb_files'));
+        }
+
+        $this->getOutput()->text(exec("bash ./tmdb_get_daily_exports.sh"));
+        $this->getOutput()->text(exec("bash ./tmdb_load_exports_to_db.sh"));
+
         $success = DB::statement(DB::raw(<<<QUERY
             insert into movie_meta_information (movie_id, original_title, adult, video, popularity, created_at, updated_at)
             select id, original_title, adult, video, popularity, current_timestamp, current_timestamp
@@ -46,13 +59,7 @@ class UpdateMovieMetaInformationIds extends Command
                 from movie_meta_information)
         QUERY));
 
-        $count = 0;
-        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
-            $this->watchProviderService->updateWatchProviderAvailability($meta)->saveOrFail();
-            echo "$count" . PHP_EOL;
-            $count++;
-        }
-
         return $success ? 0 : 1;
     }
+
 }
