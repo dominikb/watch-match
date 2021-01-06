@@ -18,5 +18,7 @@ mix.sass('resources/sass/navigation.sass', 'public/css');
 mix.sass('resources/sass/movie.sass', 'public/css');
 
 mix.copyDirectory('resources/icons', 'public/icons');
+mix.copyDirectory('resources/img', 'public/img');
+mix.copyDirectory('resources/js', 'public/js');
 
 mix.browserSync('http://localhost:8000/');
