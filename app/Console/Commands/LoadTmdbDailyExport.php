@@ -59,7 +59,14 @@ class LoadTmdbDailyExport extends Command
                 from movie_meta_information)
         QUERY));
 
-        return $success ? 0 : 1;
+        $success += DB::statement(DB::raw(<<<QUERY
+            insert into tv_show_meta_information (tv_show_id, original_name, popularity, created_at, updated_at)
+            select id, original_name, popularity, current_timestamp, current_timestamp
+            from tv_series_ids t
+            where t.id in (select id from tv_series_ids except select tv_show_id from tv_show_meta_information);
+        QUERY));
+
+        return $success > 0 ? 1 : 0; // Fail on any error
     }
 
 }

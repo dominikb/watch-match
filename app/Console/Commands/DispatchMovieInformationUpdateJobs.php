@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\MovieMetaInformation;
 use App\Jobs\CheckWatchProvidersJob;
+use App\Models\TvShowMetaInformation;
 use App\Jobs\CheckMovieForRecommendability;
+use App\Jobs\CheckTvShowForRecommendability;
 
 class DispatchMovieInformationUpdateJobs extends Command
 {
@@ -42,13 +44,25 @@ class DispatchMovieInformationUpdateJobs extends Command
     {
         $jobsCreated = 0;
 
-        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
-            CheckWatchProvidersJob::dispatch($meta->movie_id);
-            $jobsCreated++;
-        }
+//        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
+//            CheckWatchProvidersJob::dispatch($meta->movie_id);
+//            $jobsCreated++;
+//        }
+//
+//        foreach (MovieMetaInformation::shouldUpdateRecommendability()->cursor() as $meta) {
+//            CheckMovieForRecommendability::dispatch($meta->movie_id);
+//            $jobsCreated++;
+//        }
+//
+//        foreach (TvShowMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
+//            CheckWatchProvidersJob::dispatch(
+//                $meta->tv_show_id, CheckWatchProvidersJob::TV_SHOW
+//            );
+//            $jobsCreated++;
+//        }
 
-        foreach (MovieMetaInformation::shouldUpdateRecommendability()->cursor() as $meta) {
-            CheckMovieForRecommendability::dispatch($meta->movie_id);
+        foreach (TvShowMetaInformation::shouldUpdateRecommendability()->cursor() as $item) {
+            CheckTvShowForRecommendability::dispatch($item->tv_show_id);
             $jobsCreated++;
         }
 

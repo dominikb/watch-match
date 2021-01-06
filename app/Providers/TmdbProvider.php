@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Tmdb\Client;
 use Tmdb\ApiToken;
+use Tmdb\Repository\TvRepository;
 use Tmdb\Repository\MovieRepository;
 use Illuminate\Support\ServiceProvider;
 use Tmdb\HttpClient\Plugin\LanguageFilterPlugin;
@@ -55,5 +56,9 @@ class TmdbProvider extends ServiceProvider
         $this->app->singleton(MovieRepository::class, function() {
             return new MovieRepository($this->client);
         });
+
+//        $this->app->singleton(TvRepository::class, function() {
+//            return new TvRepository($this->client);
+//        });
     }
 }

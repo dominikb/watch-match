@@ -15,7 +15,8 @@
         "laravel/framework": "^8.12",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
-        "php-tmdb/api": "^3.0"
+        "php-tmdb/api": "^3.0",
+        "spatie/laravel-query-builder": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

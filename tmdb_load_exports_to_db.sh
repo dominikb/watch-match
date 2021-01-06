@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -au
+set -aux
 
 pushd tmdb_files
 

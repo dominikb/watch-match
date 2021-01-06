@@ -3,9 +3,11 @@
 namespace App;
 
 use GuzzleHttp\HandlerStack;
+use Tmdb\Repository\TvRepository;
 use App\Models\MovieMetaInformation;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Models\TvShowMetaInformation;
 use Kevinrob\GuzzleCache\CacheMiddleware;
 use Illuminate\Http\Client\PendingRequest;
 use Kevinrob\GuzzleCache\Storage\LaravelCacheStorage;
@@ -25,6 +27,31 @@ class WatchProviderService
 
         $this->client = Http::withOptions(['handler' => $stack])->asJson();
 
+    }
+
+    public function updateTvShowWatchProviderAvailability(TvShowMetaInformation $meta) : TvShowMetaInformation
+    {
+        $token = config('tmdb.api_token');
+        $tvShowId = $meta->tv_show_id;
+
+        $url = config('tmdb.base_url') . "/tv/${tvShowId}/watch/providers?api_key=${token}";
+
+        $providers = $this->client->get($url)->json('results.AT.flatrate');
+
+        $meta->providers_checked_at = now();
+
+        if (! $providers) {
+            $meta->available_on_netflix = false;
+        } else {
+            foreach ($providers as $provider) {
+                if ($provider['provider_name'] == "Netflix") {
+                    $meta->available_on_netflix = true;
+                    break;
+                }
+            }
+        }
+
+        return $meta;
     }
 
     public function updateWatchProviderAvailability(MovieMetaInformation $meta): MovieMetaInformation

@@ -5,6 +5,7 @@ storage/framework/cache
 storage/cache
 public/js
 public/css
+public/icons
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,laravel,phpunit
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,laravel,phpunit
