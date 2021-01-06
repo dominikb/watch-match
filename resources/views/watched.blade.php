@@ -1,22 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Bereits gesehen Filme</h1>
+    <h1>Watched</h1>
 
-    <div style="display: grid; grid-template-columns: 50% 50%;">
+    <div class="movie_grid">
         @foreach($movies as $movie)
-            <div>
-                <h2>{{ $movie->getTitle() }}</h2>
-                <img src="{{ config('tmdb.image_path') . $movie->getBackdropPath() }}"
-                     alt="{{ $movie->getTitle() }} backdrop image"
-                     style="width: 100%; max-width: 500px;">
+            <div class="movie">
+                <div class="movie_image_wrapper">
+                    <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $movie->getBackdropPath() }})"></div>
+                </div>
+                <strong>{{ $movie->getTitle() }}</strong>
             </div>
         @endforeach
     </div>
 
-    <div style="background-color: red">
-
-        {{ $userMovieInformation->links() }}
-    </div>
 @endsection
 

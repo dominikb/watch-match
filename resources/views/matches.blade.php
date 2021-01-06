@@ -3,7 +3,14 @@
 @section('content')
     <h1>Matches</h1>
 
-    @foreach($movies as $movie)
-        <img src="{{ config('tmdb.image_path') . $movie->getPosterPath() }}" alt="Movie poster" width="400px">
-    @endforeach
+    <div class="movie_grid">
+        @foreach($movies as $movie)
+            <div class="movie">
+                <div class="movie_image_wrapper">
+                    <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $movie->getBackdropPath() }})"></div>
+                </div>
+                <strong>{{ $movie->getTitle() }}</strong>
+            </div>
+        @endforeach
+    </div>
 @endsection
