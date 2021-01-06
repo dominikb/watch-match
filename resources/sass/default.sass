@@ -4,12 +4,24 @@
     border: 0
     padding: 0
     margin: 0
+    box-sizing: border-box
+
+html
+    text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%
+
+
+.hideme
+    display: none !important
 
 body
     background-color: $text-color
     font-family: 'Open Sans', sans-serif
     font-size: 1rem
+    font-kerning: normal;
     color: $text-color-light
+    line-height: 1.6
+    text-rendering: geometricPrecision;
     
 
 main 
@@ -17,6 +29,7 @@ main
     max-width: 100rem
     min-width: 12rem
     margin: 0 auto
+    padding-bottom: 5rem
 
 h1 
     color: $text-color-light
@@ -46,3 +59,12 @@ button
     &.active
         border-color: $main-color
         color: $main-color
+
+.logo
+    display: flex
+    justify-content: center
+    margin-bottom: 2rem
+    
+    .icon
+        display: block
+        width: 8rem

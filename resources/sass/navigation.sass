@@ -9,6 +9,7 @@ nav
     box-shadow: $box-shadow-inset
     display: flex
     justify-content: space-between
+    z-index: 1
 
     .menuitem 
         fill: $text-color-light
@@ -36,3 +37,12 @@ nav
             background: lighten($bg-color, 3%)
             fill: $main-color
             
+    &:before 
+        content: ""
+        left: 0
+        right: 0
+        bottom: 0
+        top: -10rem
+        position: absolute
+        background: linear-gradient(180deg, rgba(10,22,18,0) 0%, rgba(10,22,18,1) 100%)
+        z-index: -1
