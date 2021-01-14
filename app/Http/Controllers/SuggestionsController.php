@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Tmdb\Model\Movie;
 use Illuminate\Http\Request;
-use App\Models\MovieMetaInformation;
-use Tmdb\Repository\MovieRepository;
-use App\Models\UserMovieInformation;
+use App\Models\Recommendable;
 use Illuminate\Database\Query\Builder;
+use App\Models\UserRecommendableRating;
 
 class SuggestionsController extends Controller
 {
-    public function __construct(private MovieRepository $movieRepository)
-    {
-    }
 
     /**
      * Handle the incoming request.
@@ -23,19 +18,15 @@ class SuggestionsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $meta = MovieMetaInformation::query()
+        $suggestion = Recommendable::query()
             ->inRandomOrder()
-            ->where('available_on_netflix', true)
-            ->where('recommendable', true)
-            ->whereNotIn('movie_id', function(Builder $query) {
-                return $query->select('movie_id')
-                    ->from(with(new UserMovieInformation())->getTable())
+            ->whereNotIn('id', function(Builder $q) {
+                $q->select('recommendable_id')
+                    ->from((new UserRecommendableRating())->getTable())
                     ->where('username', session('username'));
             })
-            ->first();
+            ->firstOrFail();
 
-        $movie = $this->movieRepository->load($meta->movie_id);
-
-        return view('suggest', compact('movie'));
+        return view('suggest', compact('suggestion'));
     }
 }

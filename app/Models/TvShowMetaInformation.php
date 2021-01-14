@@ -16,7 +16,7 @@ class TvShowMetaInformation extends Model
     public function scopeShouldUpdateNetflixProvider(Builder $query): Builder {
         return $query
             ->whereNull('providers_checked_at')
-            ->orWhereDate('providers_checked_at', '<', Carbon::now()->subDays(7));
+            ->orWhereDate('providers_checked_at', '<', Carbon::now()->subDays(30));
     }
 
     public function scopeShouldUpdateRecommendability(Builder $query): Builder {

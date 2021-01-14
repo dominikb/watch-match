@@ -7,20 +7,20 @@
 
     <div class="movie_card">
         <div class="movie_image_wrapper">
-            <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $movie->getBackdropPath() }})"></div>
+            <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $suggestion->image_path }})"></div>
         </div>
         <div class="movie_info">
-            <strong class="title">{{ $movie->getTitle() }}</strong>
-            <small class="runtime">{{$movie->getRuntime() }} min</small>
+            <strong class="title">{{ $suggestion->title }}</strong>
+            <small class="runtime">{{ $suggestion->getFormattedRuntime() }}</small>
             <span class="description">
-                {{ $movie->getOverview() }}
+                {{ $suggestion->description }}
             </span>
         </div>
     </div>
 
     <form action="/rate-suggestion" method="post">
         @csrf
-        <input hidden type="text" name="movie_id" value="{{ $movie->getId() }}">
+        <input hidden type="text" name="recommendable_id" value="{{ $suggestion->id }}">
         <div class="options_wrapper">
             <button title="Mag ich nicht" class="option_primary" name="dislike" onclick="animateOption(this)"><x-icon-close/></button>
             <button title="Hab ich schon gesehen" class="option_secondary" name="seen" onclick="animateOption(this)"><x-icon-check/></button>

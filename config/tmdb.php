@@ -4,7 +4,7 @@ return [
 
     'base_url' => 'https://api.themoviedb.org/3',
 
-    'image_path' => 'https://image.tmdb.org/t/p/original',
+    'image_path' => 'https://image.tmdb.org/t/p/w780',
 
     'api_token' => env('TMDB_API_TOKEN'),
 

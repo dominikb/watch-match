@@ -22,11 +22,7 @@
 
         <title>WatchMatch</title>
 
-        <link href="{{ asset('css/settings.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/default.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/navigation.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/movie.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
@@ -34,7 +30,6 @@
 
         <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 
-        <script src="{{ asset('js/script.js')}}"></script>
     </head>
     <body>
 
@@ -46,5 +41,6 @@
 
         @include('partials/menu')
 
+        <script src="{{ asset('js/script.js')}}"></script>
     </body>
 </html>

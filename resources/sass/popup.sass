@@ -1,0 +1,45 @@
+@import "settings"
+
+.popup
+    position: fixed
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100vw
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    background-color: rgba(30, 30, 30, 0.8)
+    padding: 10vh 2vw 0
+    z-index: 10
+
+    .backdrop_image_wrapper
+        width: 100%
+        margin-top: 20vh
+
+        .backdrop_image
+            height: 0
+            width: 100%
+            padding-bottom: 50%
+            border-radius: $border-radius
+            background-position: center
+            background-repeat: no-repeat
+            background-size: cover
+
+    form
+        display: flex
+        justify-content: flex-end
+
+        .option_primary
+            border-radius: 50%
+            border-color: $main-color
+            background-color: $main-color
+            padding: 1em
+            transform: translateY(-50%)
+
+            .icon
+                fill: $text-color-light
+                display: block
+                width: 2rem
+                height: 2rem
+

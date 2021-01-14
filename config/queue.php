@@ -15,6 +15,7 @@ return [
 
     'default' => env('QUEUE_CONNECTION', 'sync'),
     'high' => env('QUEUE_CONNECTION', 'sync'),
+    'provider-updates' => env('QUEUE_CONNECTION', 'sync'),
 
     /*
     |--------------------------------------------------------------------------

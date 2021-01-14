@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 mkdir -p tmdb_files
-pushd tmdb_files
+cd tmdb_files
 
 set -au
 
@@ -24,5 +24,3 @@ do
 done
 
 gzip -f -d *.gz
-
-popd

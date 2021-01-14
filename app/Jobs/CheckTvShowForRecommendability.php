@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+# Deprecation warnings when using from tmdb api client
+error_reporting(E_ERROR);
+
 use Tmdb\Model\Tv;
-use Tmdb\Model\Movie;
 use Illuminate\Bus\Queueable;
 use Tmdb\Repository\TvRepository;
 use App\Models\TvShowMetaInformation;

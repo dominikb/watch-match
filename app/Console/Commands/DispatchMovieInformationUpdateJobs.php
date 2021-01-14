@@ -44,22 +44,22 @@ class DispatchMovieInformationUpdateJobs extends Command
     {
         $jobsCreated = 0;
 
-//        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
-//            CheckWatchProvidersJob::dispatch($meta->movie_id);
-//            $jobsCreated++;
-//        }
-//
-//        foreach (MovieMetaInformation::shouldUpdateRecommendability()->cursor() as $meta) {
-//            CheckMovieForRecommendability::dispatch($meta->movie_id);
-//            $jobsCreated++;
-//        }
-//
-//        foreach (TvShowMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
-//            CheckWatchProvidersJob::dispatch(
-//                $meta->tv_show_id, CheckWatchProvidersJob::TV_SHOW
-//            );
-//            $jobsCreated++;
-//        }
+        foreach (MovieMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
+            CheckWatchProvidersJob::dispatch($meta->movie_id)->onQueue('provider-updates');
+            $jobsCreated++;
+        }
+
+        foreach (MovieMetaInformation::shouldUpdateRecommendability()->cursor() as $meta) {
+            CheckMovieForRecommendability::dispatch($meta->movie_id);
+            $jobsCreated++;
+        }
+
+        foreach (TvShowMetaInformation::shouldUpdateNetflixProvider()->cursor() as $meta) {
+            CheckWatchProvidersJob::dispatch(
+                $meta->tv_show_id, CheckWatchProvidersJob::TV_SHOW
+            )->onQueue('provider-updates');
+            $jobsCreated++;
+        }
 
         foreach (TvShowMetaInformation::shouldUpdateRecommendability()->cursor() as $item) {
             CheckTvShowForRecommendability::dispatch($item->tv_show_id);

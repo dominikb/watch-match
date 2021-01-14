@@ -3,28 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recommendable;
 use Tmdb\Repository\MovieRepository;
 use App\Models\UserMovieInformation;
+use Illuminate\Database\Query\Builder;
+use App\Models\UserRecommendableRating;
 
 class WatchedController extends Controller
 {
-    public function __construct(private MovieRepository $movieRepository)
-    {
-    }
 
     public function __invoke(Request $request)
     {
-        $userMovieInformation = UserMovieInformation::query()
-                                                    ->where('rating', 'seen')
-                                                    ->where('username', session('username'))
-                                                    ->simplePaginate(4);
-        $movies = collect($userMovieInformation->items())
-            ->map(function (UserMovieInformation $item) {
-                return $this->movieRepository->load($item->movie_id);
-            });
+        // TODO: ordering
+        $watched = Recommendable::query()
+            ->whereIn('id', function (Builder $query) {
+                $query->select('recommendable_id')
+                    ->from((new UserRecommendableRating)->getTable())
+                    ->where('rating', 'seen')
+                    ->where('username', session('username'));
+            })
+            ->get();
 
-        return view('watched', compact(
-            'userMovieInformation', 'movies'
-        ));
+        return view('watched', compact('watched'));
     }
 }

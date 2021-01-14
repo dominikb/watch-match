@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -aux
 
-pushd tmdb_files
+cd tmdb_files
 
 formatted_date=$(date +'%m_%d_%Y')
 function query()
@@ -53,5 +53,3 @@ cat "tv_network_ids_${formatted_date}.json" \
   | jq -r '"\(.id)|^\(.name)^"' > "tv_network_ids.csv"
 docker cp tv_network_ids.csv watch-match_db_1:/tmp
 query "copy tv_network_ids (id, name) from '/tmp/tv_network_ids.csv' with ( quote '^', delimiter E'|', format csv);"
-
-popd

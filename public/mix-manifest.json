@@ -1,7 +1,9 @@
 {
     "/css/settings.css": "/css/settings.css",
+    "/css/default.css": "/css/default.css",
     "/css/login.css": "/css/login.css",
     "/css/navigation.css": "/css/navigation.css",
     "/css/movie.css": "/css/movie.css",
-    "/css/default.css": "/css/default.css"
+    "/css/popup.css": "/css/popup.css",
+    "/css/main.css": "/css/main.css"
 }

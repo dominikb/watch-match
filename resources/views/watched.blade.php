@@ -4,12 +4,12 @@
     <h1>Watched</h1>
 
     <div class="movie_grid">
-        @foreach($movies as $movie)
+        @foreach($watched as $item)
             <div class="movie">
                 <div class="movie_image_wrapper">
-                    <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $movie->getBackdropPath() }})"></div>
+                    <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $item->image_path }})"></div>
                 </div>
-                <strong>{{ $movie->getTitle() }}</strong>
+                <strong>{{ $item->title }}</strong>
             </div>
         @endforeach
     </div>

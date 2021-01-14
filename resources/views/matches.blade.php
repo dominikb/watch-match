@@ -4,13 +4,17 @@
     <h1>Matches</h1>
 
     <div class="movie_grid">
-        @foreach($movies as $movie)
-            <div class="movie">
+        @foreach($matches as $match)
+            <div class="movie"
+                 id="{{ $match->id }}"
+                 onclick="openPopup({{ $match->id }}, '{{ $match->getFullImagePath() }}')">
                 <div class="movie_image_wrapper">
-                    <div class="movie_image" style="background-image: url({{ config('tmdb.image_path') . $movie->getBackdropPath() }})"></div>
+                    <div class="movie_image" style="background-image: url({{ $match->getFullImagePath() }})"></div>
                 </div>
-                <strong>{{ $movie->getTitle() }}</strong>
+                <strong>{{ $match->title }}</strong>
             </div>
         @endforeach
     </div>
+
+    @include('partials.recommendable-popup')
 @endsection
