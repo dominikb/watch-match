@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\UserRecommendableRating;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\WatchedController;
+use App\Http\Controllers\DislikesController;
 use App\Http\Controllers\SuggestionsController;
 
 /*
@@ -65,3 +67,5 @@ Route::get('/logout', function() {
 
 Route::get('/matches', MatchesController::class);
 Route::get('/watched', WatchedController::class);
+Route::get('/likes', LikesController::class);
+Route::get('/dislikes', DislikesController::class);

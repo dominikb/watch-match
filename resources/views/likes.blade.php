@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Likes (Diese Seite braucht keiner</h1>
+    <h1>Likes</h1>
 
-    <div style="display: grid; grid-template-columns: 50% 50%;">
-        @foreach($movies as $movie)
-            <div>
-                <h2>{{ $movie->getTitle() }}</h2>
-                <img src="{{ config('tmdb.image_path') . $movie->getBackdropPath() }}"
-                     alt="{{ $movie->getTitle() }} backdrop image"
-                     style="width: 100%; max-width: 500px;">
+    <div class="movie_grid">
+        @foreach($likes as $like)
+            <div class="movie"
+                 id="{{ $like->id }}"
+                 onclick="openPopup({{ $like->id }}, '{{ $like->getFullImagePath() }}')">
+                <div class="movie_image_wrapper">
+                    <div class="movie_image" style="background-image: url({{ $like->getFullImagePath() }})"></div>
+                </div>
+                <strong>{{ $like->title }}</strong>
             </div>
         @endforeach
     </div>
 
-    {{ $userMovieInformation->links() }}
 @endsection
-
